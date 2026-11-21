@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Upload Resume · SmartResume{% endblock %}
+{% block content %}
+<div class="page-title"><p class="eyebrow">ADD A CANDIDATE</p><h1>Upload resume</h1><p class="muted">Supported formats: PDF and DOCX. Maximum file size: 8 MB.</p></div>
+<form class="panel upload-box" method="post" enctype="multipart/form-data">
+  <label for="resume">Choose resume file</label>
+  <input id="resume" name="resume" type="file" accept=".pdf,.docx" required>
+  <p class="hint">The parser extracts contact details, skills and education where available. Please verify the results.</p>
+  <button class="button" type="submit">Parse and save resume</button>
+</form>
+{% endblock %}

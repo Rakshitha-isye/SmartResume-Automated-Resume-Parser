@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SmartResume{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><p class="eyebrow">RESUME MANAGEMENT</p><h1>Candidate dashboard</h1>
+  <p class="muted">Upload resumes, extract candidate information and find profiles by skills.</p>
+  <a class="button" href="{{ url_for('upload') }}">Upload a resume</a></div>
+  <div class="stat"><span>{{ total }}</span><small>Resumes processed</small></div>
+</section>
+<section class="panel">
+  <div class="section-head"><h2>Recently added</h2><a href="{{ url_for('candidates') }}">View all</a></div>
+  {% if latest %}
+  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Skills</th><th></th></tr></thead><tbody>
+  {% for c in latest %}<tr><td>{{ c.name }}</td><td>{{ c.email or "—" }}</td><td>{{ c.skills or "Not detected" }}</td><td><a href="{{ url_for('candidate_detail', candidate_id=c.id) }}">View</a></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<p class="muted">No resumes yet. Upload your first candidate resume to get started.</p>{% endif %}
+</section>
+{% endblock %}

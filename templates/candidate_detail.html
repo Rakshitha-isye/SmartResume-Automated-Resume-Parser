@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ candidate.name }} · SmartResume{% endblock %}
+{% block content %}
+<div class="page-title"><p class="eyebrow">CANDIDATE PROFILE</p><h1>{{ candidate.name }}</h1><p class="muted">Uploaded {{ candidate.created_at.strftime("%d %B %Y, %I:%M %p") }}</p></div>
+<section class="panel details">
+  <div><small>EMAIL</small><p>{{ candidate.email or "Not detected" }}</p></div>
+  <div><small>PHONE</small><p>{{ candidate.phone or "Not detected" }}</p></div>
+  <div><small>SKILLS</small><p>{{ candidate.skills or "Not detected" }}</p></div>
+  <div><small>EDUCATION KEYWORDS</small><p>{{ candidate.education or "Not detected" }}</p></div>
+  <div><small>ORIGINAL FILE</small><p>{{ candidate.original_filename }}</p></div>
+  <div class="actions"><a class="button" href="{{ url_for('download_resume', filename=candidate.filename) }}">Download resume</a>
+  <form method="post" action="{{ url_for('delete_candidate', candidate_id=candidate.id) }}" onsubmit="return confirm('Delete this candidate and uploaded resume?')"><button class="button danger" type="submit">Delete candidate</button></form></div>
+</section>
+<section class="panel"><h2>Extracted resume text</h2><pre class="extracted">{{ candidate.extracted_text }}</pre></section>
+<p class="hint">Automated extraction may be incomplete or incorrect. Review details before using them for hiring decisions.</p>
+{% endblock %}
